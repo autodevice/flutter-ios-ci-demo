@@ -1,15 +1,24 @@
-# flutter-ios-ci-demo
+# Flutter iOS CI Demo
 
-Flutter iOS CI demo for building and testing Flutter apps on iOS
+A Flutter iOS simulator app that builds via GitHub Actions and uploads to AutoDevice.
 
-## Overview
+## Build
 
-This repository is a demo project for [AutoDevice](https://autodevice.dev) CI integration.
+```bash
+flutter pub get
+flutter build ios --simulator --debug
+```
 
-## Getting Started
+The output `.app` is in `build/ios/iphonesimulator/`.
 
-Coming soon.
+## CI/CD
 
-## License
+The GitHub Actions workflow (`.github/workflows/build.yml`) runs on every push to `main`:
 
-MIT
+1. Sets up Flutter 3.27.4 on `macos-15`
+2. Builds a simulator app with `flutter build ios --simulator --debug`
+3. Uploads the `.app` to AutoDevice
+
+## Required Secrets
+
+- `AUTODEVICE_API_KEY` — AutoDevice API key for uploading builds
